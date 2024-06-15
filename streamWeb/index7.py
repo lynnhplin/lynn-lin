@@ -1,0 +1,7 @@
+import streamlit as st
+
+st.write("INSIDE THE FORM")
+slider_val = st.slider("Form slider")
+checkbox_val = st.checkbox("Form checkbox")
+
+st.write("slider",slider_val,"checkbox",checkbox_val)
