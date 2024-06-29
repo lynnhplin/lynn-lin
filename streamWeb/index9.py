@@ -10,7 +10,7 @@ selected_value = st.sidebar.selectbox(
 with st.sidebar:
     radio_value = st.radio(
         "Choose a shipping method",
-        ("Standard(5-15 days)","Express(2-3 days)")
+        (".Standard(5-15 days)","Express(2-3 days)")
     )
 
 st.write(selected_value,radio_value)
