@@ -3,7 +3,7 @@ from pydantic import BaseModel,Field,RootModel,field_validator,field_serializer
 import streamlit as st
 import source
 from source import Root
-import pandas as pd
+
 
 try:
     data_str = source.download_youbike()
@@ -15,7 +15,7 @@ else:
     areas:list[str] = list(set(map(lambda value:value['行政區'],data)))
 
     st.title("台北市youbike各行政區站點資料")
-    tableContainer = st.container(border=False)
+    tableContainer = st.container(height=500,border=False)
     
     def area_change():
         sarea_name = st.session_state.sarea
@@ -26,16 +26,9 @@ else:
                 display_data.append(item)
         with tableContainer:
             st.subheader(sarea_name)
-            df1= pd.DataFrame(display_data,columns=['站點名稱','日期時間','地址','總數','可借','可還'])
-            st.dataframe(data=df1)
+            st.dataframe(data=display_data)
 
-            df2 =pd.DataFrame(display_data,
-                              columns=['站點名稱','總數','可借'])
 
-            st.scatter_chart(df2,
-                             x='站點名稱',
-                             y='總數',
-                             size='可借')
 
     with st.sidebar:
         st.selectbox(":orange[請選擇行政區域:]",options=areas,on_change=area_change,key='sarea')
